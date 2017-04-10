@@ -1,4 +1,4 @@
-#if we want to use tf.Placeholder insteand of tf.Variable then value of these varibale are always apaased by feed dictionary
+#placeholder variables are used for tensor varibales of unknown size and they are passed in session using feed_dict parameter
 import tensorflow as tf
 tf.set_random_seed(55)
 
