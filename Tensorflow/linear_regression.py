@@ -1,33 +1,32 @@
+# linear regression using tensorflow
 import tensorflow as tf
-tf.set_random_seed(777)  # for reproducibility
+tf.set_random_seed(2)
 
-# X and Y data
-x_train = [1, 2, 3]
-y_train = [1, 2, 3]
+#imput layer
+x = [1,2,3,4,5,6,7,8,9]
+#output layer
+y = [2,4,6,8,10,12,14,16,18]
 
-# Try to find values for W and b to compute y_data = x_data * W + b
-# We know that W should be 1 and b should be 0
-# But let TensorFlow figure it out
-W = tf.Variable(tf.random_normal([1]), name='weight')
-b = tf.Variable(tf.random_normal([1]), name='bias')
+#weight vector betwwen imput and output layer
+w = tf.Variable(tf.random_normal([1]), name="weight")
+#bias vector for output layer
+b = tf.Variable(tf.random_normal([1]), name="bias")
 
-# Our hypothesis XW+b
-hypothesis = x_train * W + b
+#hypothesis function H = X*W + B
+h = x*w + b
 
-# cost/loss function
-cost = tf.reduce_mean(tf.square(hypothesis - y_train))
+cost = tf.reduce_mean(tf.square(h-y))
 
-# Minimize
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
 train = optimizer.minimize(cost)
 
-# Launch the graph in a session.
+#start the  graph in the session and initialize all global varibale
 sess = tf.Session()
-# Initializes global variables in the graph.
 sess.run(tf.global_variables_initializer())
 
-# Fit the line
-for step in range(2001):
+#training
+for step in range(5000):
     sess.run(train)
-    if step % 20 == 0:
-print(step, sess.run(cost), sess.run(W), sess.run(b))
+    print("step : {0}, cost : {1}, weight : {2}, bias : {3}".format(step, sess.run(cost), sess.run(w), sess.run(b)))
+
+sess.close()
