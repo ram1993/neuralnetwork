@@ -1,4 +1,4 @@
-#tensorboard --logdir=./logs  command to run on terminal
+#tensorboard --logdir=./logs  command to run on terminal 127.0.0.1:6006 to view in browser
 import tensorflow as tf
 import numpy as np
 tf.set_random_seed(234)
@@ -52,7 +52,7 @@ with tf.Session() as sess:
 
     sess.run(tf.global_variables_initializer())
 
-    for step in range(10001):
+    for step in range(5001):
         _, summary, cost_value = sess.run([train, merged_summary, cost], feed_dict={x:x_data, y:y_data})
         writer.add_summary(summary, global_step=step)
         print(step, cost_value)
